@@ -266,7 +266,7 @@ Possible future enhancements include:
 
 ## 👩‍💻 Author
 
-**Aashi Masadana**
+**Aashima Ssadana**
 
 GitHub:
 https://github.com/aashimasadana
