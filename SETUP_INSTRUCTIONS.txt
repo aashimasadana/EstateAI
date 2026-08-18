@@ -1,0 +1,61 @@
+HOUSE VALUATION SYSTEM - SETUP INSTRUCTIONS
+===========================================
+
+PREREQUISITE: PYTHON INSTALLATION
+---------------------------------
+
+1. Download Python from: https://www.python.org/downloads/
+   - Click on "Download Python 3.x.x" button
+   - Run the installer as Administrator
+
+2. During Installation:
+   - CHECK THE BOX: "Add Python to PATH" 
+   - Choose "Install for all users" if you have admin rights
+   - Complete the installation
+
+3. Verify Installation:
+   - Open NEW Command Prompt window
+   - Type: python --version
+   - You should see: Python 3.x.x
+
+RUNNING THE APPLICATION:
+------------------------
+
+Method 1 - Using Batch Files (Recommended):
+1. Run "train_model.bat" as Administrator (Right-click -> Run as administrator)
+2. Run "run_backend.bat" as Administrator (Keep this window OPEN)
+3. Open "frontend/index.html" in your web browser
+
+Method 2 - Manual Setup:
+1. Open Command Prompt as Administrator
+2. Navigate to the backend folder:
+   cd e:\House_Valuation_System\backend
+3. Install dependencies:
+   python -m pip install --upgrade pip
+   pip install -r requirements.txt
+4. Train the model (if not already trained):
+   python train_model.py
+5. Start the server:
+   python app.py
+6. Keep this window open and open frontend/index.html in your browser
+
+TROUBLESHOOTING:
+----------------
+
+If you still have issues:
+
+1. Check if Windows Firewall is blocking Python
+2. Temporarily disable antivirus software
+3. Make sure no other application is using port 5000
+4. If getting "port already in use" error, change port in app.py from 5000 to another port like 5001
+
+COMMON ERRORS AND SOLUTIONS:
+---------------------------
+
+- "Python is not recognized": Python not in PATH, reinstall with "Add Python to PATH" checked
+- "Port already in use": Another application is using port 5000, change the port number
+- "Permission denied": Run as Administrator
+- "Module not found": Run pip install -r requirements.txt again
+
+Once the backend server is running (you'll see "Running on http://127.0.0.1:5000"), 
+your frontend will be able to connect to it successfully.

@@ -1,0 +1,111 @@
+{
+  "r2_score": 0.7214,
+  "mae": 4445976.81,
+  "locations": {
+    "Suburban": [
+      {
+        "city": "Ahmedabad",
+        "state": "Gujarat"
+      },
+      {
+        "city": "Bhopal",
+        "state": "Madhya Pradesh"
+      },
+      {
+        "city": "Chandigarh",
+        "state": "Punjab"
+      },
+      {
+        "city": "Coimbatore",
+        "state": "Tamil Nadu"
+      },
+      {
+        "city": "Faridabad",
+        "state": "Haryana"
+      },
+      {
+        "city": "Ghaziabad",
+        "state": "Uttar Pradesh"
+      },
+      {
+        "city": "Indore",
+        "state": "Madhya Pradesh"
+      },
+      {
+        "city": "Jaipur",
+        "state": "Rajasthan"
+      },
+      {
+        "city": "Kanpur",
+        "state": "Uttar Pradesh"
+      },
+      {
+        "city": "Kochi",
+        "state": "Kerala"
+      },
+      {
+        "city": "Lucknow",
+        "state": "Uttar Pradesh"
+      },
+      {
+        "city": "Nagpur",
+        "state": "Maharashtra"
+      },
+      {
+        "city": "Patna",
+        "state": "Bihar"
+      },
+      {
+        "city": "Surat",
+        "state": "Gujarat"
+      },
+      {
+        "city": "Visakhapatnam",
+        "state": "Andhra Pradesh"
+      }
+    ],
+    "Premium": [
+      {
+        "city": "Bangalore",
+        "state": "Karnataka"
+      },
+      {
+        "city": "Delhi",
+        "state": "Delhi"
+      },
+      {
+        "city": "Mumbai",
+        "state": "Maharashtra"
+      }
+    ],
+    "Urban": [
+      {
+        "city": "Bangalore",
+        "state": "Karnataka"
+      },
+      {
+        "city": "Chennai",
+        "state": "Tamil Nadu"
+      },
+      {
+        "city": "Hyderabad",
+        "state": "Telangana"
+      },
+      {
+        "city": "Kolkata",
+        "state": "West Bengal"
+      },
+      {
+        "city": "Pune",
+        "state": "Maharashtra"
+      }
+    ]
+  },
+  "categories": [
+    "Premium",
+    "Suburban",
+    "Urban"
+  ],
+  "sqft_min": 650,
+  "sqft_max": 3500
+}

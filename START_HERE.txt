@@ -1,0 +1,55 @@
+HOUSE VALUATION SYSTEM - GETTING STARTED
+=========================================
+
+⚠️  IMPORTANT: PYTHON MUST BE INSTALLED FIRST  ⚠️
+
+STEP 1: Install Python (Required)
+---------------------------------
+1. Go to: https://www.python.org/downloads/
+2. Download and run the Python installer
+3. IMPORTANT: Check "Add Python to PATH" during installation
+4. Complete the installation
+
+STEP 2: Install Dependencies (One-time setup)
+----------------------------------------
+Right-click on "install_dependencies.bat" and select "Run as administrator"
+- This installs all required Python packages (Flask, pandas, numpy, scikit-learn)
+- Takes a few minutes depending on your internet connection
+
+STEP 3: Train the Model (One-time setup)
+----------------------------------------
+Right-click on "train_model.bat" and select "Run as administrator"
+- This creates the machine learning model file (model.pkl)
+- Takes only a few seconds
+
+STEP 4: Start the Backend Server
+--------------------------------
+Right-click on "run_backend.bat" and select "Run as administrator"
+- This starts the web server on http://127.0.0.1:5000
+- KEEP THIS WINDOW OPEN while using the application
+
+STEP 5: Use the Frontend
+-------------------------
+Open "frontend/index.html" in your web browser
+- Enter house details (area, bathrooms, bedrooms)
+- Click "Predict Price"
+- View the estimated house price
+
+ALTERNATIVE FILES PROVIDED:
+--------------------------
+- train_model.ps1 - PowerShell version of training script
+- run_backend.ps1 - PowerShell version of server script
+- SETUP_INSTRUCTIONS.txt - Detailed troubleshooting guide
+
+TROUBLESHOOTING:
+----------------
+Q: Still getting "Python not found"?
+A: Restart your computer after installing Python, or use Windows Store to install Python
+
+Q: Server won't start?
+A: Make sure no other programs are using port 5000
+
+Q: Frontend shows "Cannot connect to backend"?
+A: Verify that the backend server window is still open and running
+
+Once you complete these steps, your house valuation system will be fully operational!

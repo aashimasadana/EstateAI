@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EstateAI | Smart Property Valuation</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+    <div class="bg-animation">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo"><i class="fas fa-brain"></i><span>EstateAI</span></div>
+            <nav class="nav">
+                <a href="#calculator" class="nav-link">Calculator</a>
+                <a href="#compare" class="nav-link">Compare</a>
+                <a href="#history" class="nav-link">History</a>
+                <a href="#analytics" class="nav-link">Analytics</a>
+                <a href="#about" class="nav-link">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title"><i class="fas fa-chart-line"></i> EstateAI</h1>
+                <p class="hero-subtitle">AI-Powered Property Valuation for India</p>
+                <p class="hero-description">Instant, accurate property valuations across Indian cities — powered by Gradient Boosting AI</p>
+                <div class="model-badge">
+                    <i class="fas fa-brain"></i>
+                    <span id="modelAccuracy">Loading model info...</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Calculator ─────────────────────────────────────────────────── -->
+    <section id="calculator" class="calculator-section">
+        <div class="container">
+            <div class="card glass-card">
+                <div class="card-header">
+                    <i class="fas fa-calculator"></i>
+                    <h2>Enter House Details</h2>
+                </div>
+
+                <div class="prediction-form">
+                    <div class="location-block">
+                        <div class="location-block-title">
+                            <i class="fas fa-map-marked-alt"></i> Property Location
+                        </div>
+                        <div class="form-row three-col">
+                            <div class="form-group">
+                                <label for="category"><span class="step-badge">1</span> Category</label>
+                                <select id="category" onchange="onCategoryChange()">
+                                    <option value="" disabled selected>Select category</option>
+                                    <option value="Suburban">🏘️ Suburban</option>
+                                    <option value="Urban">🏙️ Urban</option>
+                                    <option value="Premium">💎 Premium</option>
+                                </select>
+                                <span class="field-hint" id="categoryHint">Select a category first</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="state"><span class="step-badge">2</span> State</label>
+                                <select id="state" onchange="onStateChange()" disabled>
+                                    <option value="" disabled selected>Select state</option>
+                                </select>
+                                <span class="field-hint" id="stateHint">Choose category first</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="city"><span class="step-badge">3</span> City</label>
+                                <select id="city" disabled>
+                                    <option value="" disabled selected>Select city</option>
+                                </select>
+                                <span class="field-hint" id="cityHint">Choose state first</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sqft"><i class="fas fa-ruler-combined"></i> Area (Square Feet)</label>
+                        <input type="number" id="sqft" placeholder="e.g., 1500" min="100" max="20000" required>
+                        <span class="field-hint">Supported range: 650 – 3500 sqft</span>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bath"><i class="fas fa-bath"></i> Bathrooms</label>
+                            <input type="number" id="bath" placeholder="e.g., 2" min="1" max="20" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bhk"><i class="fas fa-bed"></i> Bedrooms (BHK)</label>
+                            <input type="number" id="bhk" placeholder="e.g., 3" min="1" max="20" required>
+                        </div>
+                    </div>
+
+                    <button class="btn-primary" id="predictBtn" onclick="predictPrice()">
+                        <i class="fas fa-magic"></i> Predict Price
+                    </button>
+                </div>
+
+                <div class="loading" id="loading">
+                    <div class="spinner"></div><p>Calculating property value...</p>
+                </div>
+
+                <div class="result-container" id="resultContainer">
+                    <div class="result-icon"><i class="fas fa-rupee-sign"></i></div>
+                    <div class="result-label">Estimated Property Value</div>
+                    <div class="result-price" id="result"></div>
+                    <div class="result-range" id="resultRange"></div>
+                    <div class="result-meta" id="resultMeta"></div>
+                    <!-- Efficiency score badge -->
+                    <div class="efficiency-row" id="efficiencyRow" style="display:none;">
+                        <div class="efficiency-badge" id="efficiencyBadge"></div>
+                        <span class="efficiency-label" id="efficiencyLabel"></span>
+                    </div>
+                    <!-- Save to history button -->
+                    <button class="btn-save" id="btnSave" onclick="saveToHistory()" style="display:none;">
+                        <i class="fas fa-bookmark"></i> Save to History
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Compare Mode ───────────────────────────────────────────────── -->
+    <section id="compare" class="compare-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Compare Properties</h2>
+                <p>Fill in two properties and see a side-by-side AI valuation</p>
+            </div>
+            <div class="compare-grid">
+                <!-- Property A -->
+                <div class="compare-card" id="compareCardA">
+                    <div class="compare-card-label label-a"><i class="fas fa-home"></i> Property A</div>
+                    <div class="compare-form">
+                        <div class="form-row three-col">
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select id="cmp_a_cat" onchange="onCmpCategoryChange('a')">
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="Suburban">🏘️ Suburban</option>
+                                    <option value="Urban">🏙️ Urban</option>
+                                    <option value="Premium">💎 Premium</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>State</label>
+                                <select id="cmp_a_state" onchange="onCmpStateChange('a')" disabled>
+                                    <option value="" disabled selected>Select</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>City</label>
+                                <select id="cmp_a_city" disabled>
+                                    <option value="" disabled selected>Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-ruler-combined"></i> Area (sqft)</label>
+                                <input type="number" id="cmp_a_sqft" placeholder="e.g., 1200" min="100" max="20000">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-bath"></i> Baths</label>
+                                <input type="number" id="cmp_a_bath" placeholder="2" min="1" max="20">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-bed"></i> BHK</label>
+                            <input type="number" id="cmp_a_bhk" placeholder="3" min="1" max="20">
+                        </div>
+                    </div>
+                    <div class="compare-result" id="cmpResultA" style="display:none;"></div>
+                </div>
+
+                <!-- VS divider -->
+                <div class="compare-vs">VS</div>
+
+                <!-- Property B -->
+                <div class="compare-card" id="compareCardB">
+                    <div class="compare-card-label label-b"><i class="fas fa-building"></i> Property B</div>
+                    <div class="compare-form">
+                        <div class="form-row three-col">
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select id="cmp_b_cat" onchange="onCmpCategoryChange('b')">
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="Suburban">🏘️ Suburban</option>
+                                    <option value="Urban">🏙️ Urban</option>
+                                    <option value="Premium">💎 Premium</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>State</label>
+                                <select id="cmp_b_state" onchange="onCmpStateChange('b')" disabled>
+                                    <option value="" disabled selected>Select</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>City</label>
+                                <select id="cmp_b_city" disabled>
+                                    <option value="" disabled selected>Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-ruler-combined"></i> Area (sqft)</label>
+                                <input type="number" id="cmp_b_sqft" placeholder="e.g., 1800" min="100" max="20000">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-bath"></i> Baths</label>
+                                <input type="number" id="cmp_b_bath" placeholder="3" min="1" max="20">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-bed"></i> BHK</label>
+                            <input type="number" id="cmp_b_bhk" placeholder="4" min="1" max="20">
+                        </div>
+                    </div>
+                    <div class="compare-result" id="cmpResultB" style="display:none;"></div>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-top:24px;">
+                <button class="btn-primary" id="compareBtn" onclick="runCompare()">
+                    <i class="fas fa-balance-scale"></i> Compare Properties
+                </button>
+            </div>
+            <div class="loading" id="compareLoading">
+                <div class="spinner"></div><p>Running comparison...</p>
+            </div>
+            <!-- Summary bar shown after compare -->
+            <div class="compare-summary" id="compareSummary" style="display:none;"></div>
+            <!-- Bar chart comparing A vs B -->
+            <div class="chart-card compare-chart-card" id="compareChartCard" style="display:none; margin-top:28px;">
+                <h3><i class="fas fa-balance-scale"></i> A vs B — Price Comparison</h3>
+                <canvas id="compareBarChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Prediction History ──────────────────────────────────────────── -->
+    <section id="history" class="history-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Prediction History</h2>
+                <p>Your saved valuations — stored locally in your browser</p>
+            </div>
+            <div class="history-toolbar">
+                <span id="historyCount" class="history-count">0 saved</span>
+                <button class="btn-reset" onclick="clearHistory()"><i class="fas fa-trash-alt"></i> Clear All</button>
+            </div>
+            <div id="historyList" class="history-list">
+                <div class="history-empty"><i class="fas fa-clock"></i><p>No predictions saved yet.<br>Hit <strong>Save to History</strong> after a valuation.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Analytics ──────────────────────────────────────────────────── -->
+    <section id="analytics" class="analytics-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Market Analytics</h2>
+                <p>Explore pricing trends across India — filter by category, state, or city</p>
+
+                <div class="filter-bar">
+                    <span class="filter-label"><i class="fas fa-sliders-h"></i> Filter:</span>
+                    <div class="filter-group">
+                        <label>Category</label>
+                        <select id="chartCategory" onchange="onChartCategoryChange()">
+                            <option value="All">All</option>
+                            <option value="Suburban">Suburban</option>
+                            <option value="Urban">Urban</option>
+                            <option value="Premium">Premium</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>State</label>
+                        <select id="chartState" onchange="onChartStateChange()">
+                            <option value="All">All States</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>City</label>
+                        <select id="chartCity" onchange="refreshCharts()">
+                            <option value="All">All Cities</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Size</label>
+                        <select id="chartSize" onchange="refreshCharts()">
+                            <option value="any">Any</option>
+                            <option value="small">&lt;1000 sqft</option>
+                            <option value="medium">1000–2000</option>
+                            <option value="large">&gt;2000</option>
+                        </select>
+                    </div>
+                    <button class="btn-reset" onclick="resetFilters()"><i class="fas fa-undo"></i> Reset</button>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-icon"><i class="fas fa-rupee-sign"></i></div><div class="stat-value" id="avgPrice">—</div><div class="stat-label">Avg Price</div></div>
+                <div class="stat-card"><div class="stat-icon"><i class="fas fa-ruler-combined"></i></div><div class="stat-value" id="avgArea">—</div><div class="stat-label">Avg Area</div></div>
+                <div class="stat-card"><div class="stat-icon"><i class="fas fa-bed"></i></div><div class="stat-value" id="commonBHK">—</div><div class="stat-label">Common BHK</div></div>
+                <div class="stat-card"><div class="stat-icon"><i class="fas fa-database"></i></div><div class="stat-value" id="totalRecords">—</div><div class="stat-label">Data Points</div></div>
+                <div class="stat-card highlight"><div class="stat-icon"><i class="fas fa-brain"></i></div><div class="stat-value" id="r2Score">—</div><div class="stat-label">Model R²</div></div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card"><h3><i class="fas fa-chart-bar"></i> Price by Area</h3><canvas id="priceAreaChart"></canvas></div>
+                <div class="chart-card"><h3><i class="fas fa-chart-line"></i> Price Trend</h3><canvas id="priceTrendChart"></canvas></div>
+                <div class="chart-card"><h3><i class="fas fa-city"></i> Avg Price by City</h3><canvas id="cityChart"></canvas></div>
+                <div class="chart-card"><h3><i class="fas fa-th"></i> BHK Distribution</h3><canvas id="bhkChart"></canvas></div>
+            </div>
+
+            <div class="chart-card prediction-chart-card" id="predictionChartCard" style="display:none; margin-top:24px;">
+                <h3><i class="fas fa-crosshairs"></i> Your Prediction vs. Market</h3>
+                <canvas id="predictionChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── About ──────────────────────────────────────────────────────── -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="card glass-card">
+                <div class="card-header"><i class="fas fa-info-circle"></i><h2>About EstateAI</h2></div>
+                <div class="about-grid">
+                    <div class="about-item"><i class="fas fa-robot"></i><h4>Gradient Boosting</h4><p>GradientBoostingRegressor handles non-linear pricing far better than linear regression.</p></div>
+                    <div class="about-item"><i class="fas fa-map-marked-alt"></i><h4>City + State Aware</h4><p>Predicts based on actual city and state, not just a generic "urban" label.</p></div>
+                    <div class="about-item"><i class="fas fa-balance-scale"></i><h4>Compare Mode</h4><p>Evaluate two properties side-by-side with a full breakdown of price, ₹/sqft, and value winner.</p></div>
+                    <div class="about-item"><i class="fas fa-tag"></i><h4>Efficiency Score</h4><p>Every prediction shows ₹/sqft against the local market average — so you know if it's a deal.</p></div>
+                    <div class="about-item"><i class="fas fa-history"></i><h4>Saved History</h4><p>Bookmark valuations locally — compare yesterday's search with today's without re-entering data.</p></div>
+                    <div class="about-item"><i class="fas fa-filter"></i><h4>Deep Filtering</h4><p>Filter analytics by category → state → city → size range to zoom into any segment.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

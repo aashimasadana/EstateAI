@@ -1,0 +1,52 @@
+sqft,bath,bhk,city,state,category,price
+650,1,1,Ghaziabad,Uttar Pradesh,Suburban,2600000
+750,1,1,Faridabad,Haryana,Suburban,2900000
+800,1,1,Kanpur,Uttar Pradesh,Suburban,3100000
+850,1,1,Patna,Bihar,Suburban,3300000
+900,2,2,Lucknow,Uttar Pradesh,Suburban,4800000
+950,2,2,Indore,Madhya Pradesh,Suburban,5000000
+1000,2,2,Jaipur,Rajasthan,Suburban,5500000
+1050,2,2,Bhopal,Madhya Pradesh,Suburban,5200000
+1100,2,2,Coimbatore,Tamil Nadu,Suburban,5800000
+1200,2,2,Nagpur,Maharashtra,Suburban,6200000
+1300,3,3,Surat,Gujarat,Suburban,7500000
+1400,3,3,Visakhapatnam,Andhra Pradesh,Suburban,7800000
+1500,3,3,Kochi,Kerala,Suburban,9000000
+1600,3,3,Chandigarh,Punjab,Suburban,9500000
+1800,3,3,Ahmedabad,Gujarat,Suburban,10500000
+2000,4,4,Jaipur,Rajasthan,Suburban,12000000
+2200,4,4,Lucknow,Uttar Pradesh,Suburban,13000000
+2500,4,4,Chandigarh,Punjab,Suburban,15000000
+700,1,1,Kolkata,West Bengal,Urban,4500000
+800,1,1,Hyderabad,Telangana,Urban,5200000
+900,2,2,Chennai,Tamil Nadu,Urban,6500000
+1000,2,2,Pune,Maharashtra,Urban,7000000
+1100,2,2,Bangalore,Karnataka,Urban,8500000
+1200,2,2,Kolkata,West Bengal,Urban,8000000
+1300,2,2,Hyderabad,Telangana,Urban,9500000
+1400,3,3,Chennai,Tamil Nadu,Urban,11000000
+1500,3,3,Pune,Maharashtra,Urban,12500000
+1600,3,3,Bangalore,Karnataka,Urban,14000000
+1800,3,3,Hyderabad,Telangana,Urban,15500000
+2000,4,4,Pune,Maharashtra,Urban,17000000
+2200,4,4,Bangalore,Karnataka,Urban,20000000
+2500,4,4,Chennai,Tamil Nadu,Urban,22000000
+2800,5,5,Bangalore,Karnataka,Urban,27000000
+3000,5,5,Hyderabad,Telangana,Urban,29000000
+800,1,1,Delhi,Delhi,Premium,7500000
+900,2,2,Mumbai,Maharashtra,Premium,12000000
+1000,2,2,Delhi,Delhi,Premium,13500000
+1100,2,2,Mumbai,Maharashtra,Premium,16000000
+1200,2,2,Delhi,Delhi,Premium,17500000
+1300,3,3,Mumbai,Maharashtra,Premium,22000000
+1400,3,3,Delhi,Delhi,Premium,23000000
+1500,3,3,Mumbai,Maharashtra,Premium,27000000
+1600,3,3,Bangalore,Karnataka,Premium,21000000
+1800,3,3,Delhi,Delhi,Premium,30000000
+2000,4,4,Mumbai,Maharashtra,Premium,38000000
+2200,4,4,Delhi,Delhi,Premium,36000000
+2500,4,4,Mumbai,Maharashtra,Premium,48000000
+2800,5,5,Delhi,Delhi,Premium,52000000
+3000,5,5,Mumbai,Maharashtra,Premium,65000000
+3500,5,5,Delhi,Delhi,Premium,75000000
+3500,5,5,Mumbai,Maharashtra,Premium,82000000
